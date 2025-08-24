@@ -1,0 +1,22 @@
+/* This is a workaround to prevent Tiptap from rendering empty paragraphs as <p></p> */
+p:empty::after {
+  content: "\00A0";
+}
+
+/* p {
+  margin-bottom: 1em;
+} */
+
+.prose p {
+  white-space: pre-wrap !important;
+}
+
+/* Preserve existing styles */
+.prose {
+  max-width: none;
+  width: 100%;
+}
+
+.prose img {
+  margin: 0 auto;
+}

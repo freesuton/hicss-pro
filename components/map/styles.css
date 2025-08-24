@@ -1,0 +1,20 @@
+ 
+ /* Used to hide default marker popup */
+ .mapboxgl-popup-close-button {
+  display: none;
+}
+
+/* Style Mapbox popup shell */
+.mapboxgl-popup-content {
+  width: 340px;              /* matches previous card width */
+  background: #ffffff;       /* white */
+  border-radius: 0.75rem;    /* rounded-xl */
+  padding: 1rem;             /* Tailwind p-4 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* shadow-xl */
+  color: #1f2937;            /* Tailwind gray-900 text */
+}
+
+/* Optional: match arrow colour */
+.mapboxgl-popup-tip {
+  border-top-color: #ffffff; /* arrow inherits same white bg */
+}

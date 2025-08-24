@@ -1,0 +1,174 @@
+// Tiptap Gallery Node Styles
+.tiptap-gallery-wrapper {
+  position: relative;
+  margin: 1rem 0;
+  
+  &.selected {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+}
+
+.gallery-add-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  
+  .gallery-add-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    
+    &:hover:not(:disabled) {
+      background: #2563eb;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+    }
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .add-icon {
+      font-size: 1.125rem;
+      font-weight: bold;
+      line-height: 1;
+    }
+    
+    .add-text {
+      font-size: 0.875rem;
+    }
+    
+    .loading-spinner {
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tiptap-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
+
+  .gallery-image-container {
+    position: relative;
+    transition: all 0.2s ease;
+    
+    &.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+      cursor: grabbing !important;
+    }
+    
+    &.drag-over {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 2px #3b82f6;
+      border-radius: 4px;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+    
+    img {
+      object-fit: cover;
+      border-radius: 6px;
+      width: 100%; // fallback
+      aspect-ratio: 1;
+      transition: inherit;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  }
+
+  &[data-image-count="1"] {
+    .gallery-image-container {
+      width: 100% !important;
+    }
+  }
+
+  &[data-image-count="2"] {
+    .gallery-image-container {
+      width: calc(50% - 4px);
+    }
+  }
+
+  &[data-image-count="3"] {
+    .gallery-image-container:nth-child(1),
+    .gallery-image-container:nth-child(2),
+    .gallery-image-container:nth-child(3) {
+      width: calc(33% - 4px);
+    }
+  }
+
+  &[data-image-count="4"] {
+    .gallery-image-container {
+      width: calc(50% - 4px);
+    }
+  }
+
+  /* 5 images: 2 per row (3rd row has 1 image) */
+  &[data-image-count="5"] {
+    .gallery-image-container {
+      width: calc(33% - 4px);
+      margin: 0
+    }
+  }
+
+  /* 6 images: 2 per row (3 rows) */
+  &[data-image-count="6"] {
+    .gallery-image-container {
+      width: calc(33% - 4px);
+    }
+  }
+}
+
+// Editor-specific styles
+.tiptap-gallery-in-editor {
+  outline: 0.125rem solid transparent;
+  border-radius: var(--tt-radius-xs, 0.25rem);
+  transition: outline-color 0.2s ease;
+
+  &:hover {
+    outline-color: var(--tt-brand-color-300);
+  }
+}
+
+// Global styles for ProseMirror selected nodes
+.tiptap.ProseMirror.ProseMirror-focused {
+  .ProseMirror-selectednode .tiptap-gallery-in-editor {
+    outline-color: var(--tt-brand-color-500);
+    
+    &:hover {
+      outline-color: var(--tt-brand-color-400);
+    }
+  }
+}
